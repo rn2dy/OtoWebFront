@@ -1,0 +1,15 @@
+upstream unicorn {
+  server unix:/home/baboonworksfine/Projects/rails_323/OtoWebFront/tmp/sockets/unicorn.sock fail_timeout=0;
+}
+
+server {
+  listen 80 default;
+  root /home/baboonworksfine/Projects/rails_323/OtoWebFront/public;
+  try_files $uri/index.html $uri @unicorn;
+
+  location @unicorn {
+    proxy_pass http://unicorn;
+  }
+
+  error_page 500 502 503 504 /500.html;
+}
