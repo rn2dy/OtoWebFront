@@ -1,0 +1,91 @@
+RAILS_ENV=development
+
+use ActionDispatch::Static
+  - serve static file in "public" directory
+
+use Rack::Lock
+  - locks the rest of the application to a single thread, that means 
+    everything before it can run in multithread mode 
+
+use #<ActiveSupport::Cache::Strategy::LocalCache::Middleware:0x93538e8>
+  - flushes memory based store used internally by Rails.cache
+
+use Rack::Runtime
+  - adds X-Runtime to response header providing number of seconds to
+    process rest of the app
+
+use Rack::MethodOverride
+  - sets the HTTP request method based on "_method" parameter
+
+use ActionDispatch::RequestId
+  - assigns a unique id to the request and adds X-Request-Id response 
+    header
+
+use Rails::Rack::Logger
+  - logs beginning of request and flushes log after request
+
+use ActionDispatch::ShowExceptions
+use ActionDispatch::DebugExceptions
+  - catches exceptions and displays them on a pretty page
+
+use ActionDispatch::RemoteIp
+  - captures the remote IP address for later use
+
+use ActionDispatch::Reloader
+  - reloads classes in development
+
+use ActionDispatch::Callbacks
+  - provides before/after callback hook
+
+use ActiveRecord::ConnectionAdapters::ConnectionManagement
+  - clears active databse connections
+
+use ActiveRecord::QueryCache
+  - clears query cache at the end of each request
+
+use ActionDispatch::Cookies
+use ActionDispatch::Session::CookieStore
+use ActionDispatch::Flash
+  - persists flash, session, and cookies between requests
+
+use ActionDispatch::ParamsParser
+  - parses different formatted request (XML/JSON) into params hash
+
+use ActionDispatch::Head
+  - strips out response body on HEAD requests
+
+use Rack::ConditionalGet
+use Rack::ETag
+  - strips out response body when it has not been modified 
+
+use ActionDispatch::BestStandardsSupport
+  - tells Internet Explorer to use Chrome Frame or latest rendering 
+    engine
+
+run OtoWebFront::Application.routes
+
+
+RAILS_ENV=production
+
+use Rack::Cache
+use Rack::Lock
+use #<ActiveSupport::Cache::Strategy::LocalCache::Middleware:0x9e09508>
+use Rack::Runtime
+use Rack::MethodOverride
+use ActionDispatch::RequestId
+use Rails::Rack::Logger
+use ActionDispatch::ShowExceptions
+use ActionDispatch::DebugExceptions
+use ActionDispatch::RemoteIp
+use ActionDispatch::Callbacks
+use ActiveRecord::ConnectionAdapters::ConnectionManagement
+use ActiveRecord::QueryCache
+use ActionDispatch::Cookies
+use ActionDispatch::Session::CookieStore
+use ActionDispatch::Flash
+use ActionDispatch::ParamsParser
+use ActionDispatch::Head
+use Rack::ConditionalGet
+use Rack::ETag
+use ActionDispatch::BestStandardsSupport
+run OtoWebFront::Application.routes

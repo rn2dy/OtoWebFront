@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>OtoWebFront</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <!-- header -->
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <%= link_to 'otoWorkstation(beta)', dashboard_path, class: 'brand' %> 
+      <div class="container">
+        <form class="navbar-search pull-left">
+          <input type="text" class="search-query" placeholder="Search...">
+        </form>
+        <ul class="nav pull-right">
+          <li><%= link_to 'logout', logout_path %></li>
+        </ul>     
+      </div>
+    </div>  
+  </div>
+
+  <!-- body -->
+  <div class="container-fluid">
+    <div class="row-fluid">
+
+      <span class="span3">
+        Lorem ipsum dolor sit amet, nisl rutrum lacinia, nibh justo suspendisse commodo suscipit. Libero sit phasellus, dolor vestibulum, id at vitae purus, ligula habitasse hac, sed lacus elit nullam vestibulum eleifend. Cras risus erat enim accumsan nullam adipiscing, ligula egestas fringilla sed neque nulla. Pellentesque est sem morbi wisi, aenean leo vivamus lacus libero at vel, ornare porttitor quis volutpat, ornare eligendi, mauris aliquam luctus ornare pulvinar. Phasellus justo aenean. Vulputate urna in voluptates at neque, sem amet imperdiet ut nisl, rhoncus praesent, condimentum imperdiet senectus eleifend varius ante, ad explicabo eu pede ac imperdiet libero. Consectetuer ut, nam in morbi praesent amet dictum vehicula, libero vestibulum. Id quis semper ultrices, ac suspendisse facilisis ante arcu, imperdiet in vestibulum facilisi natoque non. Eros vel ut eget orci, metus vivamus vehicula magna, nulla auctor.
+      </span>
+
+      <span class="span9">
+        <% flash.each do |name, msg| %>
+          <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
+            <a class="close" data-dismiss="alert">x</a>
+            <%= msg %>   
+          </div>
+        <% end %>
+        
+        <%= yield %>
+      </span>
+
+    </div>
+  </div>
+
+  <!-- footer -->
+  <div class="container">
+    <div class="debug">
+      <%= debug(params) if Rails.env.development?  %>
+    </div>
+  </div>
+
+</body>
+</html>

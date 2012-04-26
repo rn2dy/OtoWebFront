@@ -18,7 +18,9 @@ group :development, :test do
   gem 'cucumber-rails'
 end
 
-gem 'bcrypt-ruby'
+gem 'bcrypt-ruby', '~> 3.0.1'
 
 gem 'jquery-rails'
 gem 'unicorn'
+
+gem 'simple_form'
